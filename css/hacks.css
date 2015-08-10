@@ -1,0 +1,79 @@
+.reveal .code-example {
+ background: #3F3F3F;
+}
+
+.reveal pre code {
+  padding: 14px 10px;
+}
+
+.reveal .ascii {
+  padding: 20px 10px;
+}
+
+.featured-code {
+  background: rgba(245, 245, 245, 0.23);
+  border-radius: 4px;
+  padding: 3px;
+}
+
+.reveal .citation {
+  font-size: 0.5em;
+  float: right;
+}
+
+.citation a {
+  color: #31688E;
+}
+
+.reveal .side-by-side-code {
+  display: inline-block;
+  width: 49%;
+}
+
+.reveal pre code {
+  max-height: initial;
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+
+  100% { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes phase {
+  0% { opacity: 1; }
+  50% {opacity: 0; }
+}
+
+.reveal h2 {
+  font-family: monospace;
+  font-weight: normal;
+}
+
+h2:after {
+  font-family: monospace;
+  content: '|';
+  animation: phase 1.5s infinite linear;
+}
+
+.reveal h3 {
+  font-weight: normal;
+}
+
+.reveal h3:before {
+  content: '😿'';
+  display:block;
+}
+
+.reveal .slide-background.present[data-background-hash*="img/fry-money"] {
+  opacity: 0.7;
+}
+
+.reveal .unstyled-list {
+  list-style: none;
+}

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>TDD: the hard parts</title>
+
+		<meta name="author" content="Nick Tomlin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/hacks.css">
+
+    <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+    <div class="slides">
+      <section data-markdown="slides.md"
+        data-separator="^---"
+        data-separator-vertical="VEEEEEEEEEEEEEEEEEEEEEEEEEEERTICAL"
+        data-separator-notes="^Note:"
+      </section>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			Reveal.initialize({
+				controls: false,
+				progress: false,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.pack.js', async: true,
+            callback: function() {
+              // horrible hacks
+              var js = hljs.getLanguage('js');
+              ['constructor', 'it', 'describe', 'beforeEach'].forEach(function (kw) {
+                js.keywords.keyword += ' ' + kw;
+              });
+
+              // START CUSTOM REVEAL.JS INTEGRATION
+              (function() {
+                if( typeof window.addEventListener === 'function' ) {
+                  var hljs_nodes = document.querySelectorAll( 'pre code' );
+
+                  for( var i = 0, len = hljs_nodes.length; i < len; i++ ) {
+                    var element = hljs_nodes[i];
+
+                    // trim whitespace if data-trim attribute is present
+                    if( element.hasAttribute( 'data-trim' ) && typeof element.innerHTML.trim === 'function' ) {
+                      element.innerHTML = element.innerHTML.trim();
+                    }
+
+                    // Now escape html unless prevented by author
+                    if( ! element.hasAttribute( 'data-noescape' )) {
+                      element.innerHTML = element.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+                    }
+
+                    // re-highlight when focus is lost (for edited code)
+                    element.addEventListener( 'focusout', function( event ) {
+                      hljs.highlightBlock( event.currentTarget );
+                    }, false );
+                  }
+                }
+              })();
+
+              [].forEach.call( document.querySelectorAll( '.highlight' ), function( v, i) {
+                hljs.highlightBlock(v);
+              });
+              hljs.initHighlightingOnLoad();
+            }
+          },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/video.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

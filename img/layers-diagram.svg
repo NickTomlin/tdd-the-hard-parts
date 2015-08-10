@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="863px" height="729px" viewBox="0 0 863 729" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>Slice 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <polygon id="Triangle-1" stroke="#979797" sketch:type="MSShapeGroup" points="431.5 72 862 728 1 728 "></polygon>
+        <text id="Manual" sketch:type="MSTextLayer" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+            <tspan x="375" y="221">Manual</tspan>
+        </text>
+        <text id="Integration-(Seleniu" sketch:type="MSTextLayer" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+            <tspan x="257" y="374">Integration (Selenium)</tspan>
+        </text>
+        <text id="Unit" sketch:type="MSTextLayer" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+            <tspan x="399" y="677">Unit</tspan>
+        </text>
+        <text id="Component-Integratio" sketch:type="MSTextLayer" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+            <tspan x="255" y="544">Component Integration</tspan>
+        </text>
+        <path d="M193.5,437.5 L673.550629,437.5" id="Line" stroke="#979797" stroke-linecap="square" sketch:type="MSShapeGroup"></path>
+        <path d="M98.5,602.5 L765.502991,602.5" id="Line" stroke="#979797" stroke-linecap="square" sketch:type="MSShapeGroup"></path>
+        <path d="M296.466937,277.5 L565.5,277.5" id="Line-Copy" stroke="#979797" stroke-linecap="square" sketch:type="MSShapeGroup"></path>
+        <text id="😿-USER😿-" sketch:type="MSTextLayer" font-family="Apple Color Emoji" font-size="36" font-weight="normal" fill="#000000">
+            <tspan x="341" y="36">😿 </tspan>
+            <tspan x="377" y="36" font-family="Helvetica">USER</tspan>
+            <tspan x="477.019531" y="36">😿</tspan>
+            <tspan x="513.019531" y="36" font-family="Helvetica"> </tspan>
+        </text>
+    </g>
+</svg>
