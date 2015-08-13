@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="479px" height="303px" viewBox="0 0 479 303" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>red-green-refactor-diagram</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <text id="Write-a-" sketch:type="MSTextLayer" font-family="Helvetica" font-size="36" font-weight="normal" sketch:alignment="middle" fill="#000000">
+            <tspan x="5.31054688" y="65">Write a </tspan>
+            <tspan x="14.9697266" y="108">failing </tspan>
+            <tspan x="28.9882812" y="151">Test</tspan>
+        </text>
+        <text id="Make-" sketch:type="MSTextLayer" font-family="Helvetica" font-size="36" font-weight="normal" sketch:alignment="middle" fill="#000000">
+            <tspan x="370.484375" y="65">Make </tspan>
+            <tspan x="350.462891" y="108">that test</tspan>
+            <tspan x="376.478516" y="151">pass</tspan>
+        </text>
+        <text id="Refactor-" sketch:type="MSTextLayer" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+            <tspan x="169" y="252">Refactor </tspan>
+            <tspan x="169" y="295">your code</tspan>
+        </text>
+        <g id="Red" sketch:type="MSLayerGroup" transform="translate(158.000000, 1.000000)" stroke="#FA0000">
+            <g id="Path-4" transform="translate(0.000000, 16.000000)" stroke-width="14" sketch:type="MSShapeGroup">
+                <path d="M0.51953125,15.9179688 C0.51953125,15.9179688 49.9310282,0.284043127 76.4453125,0.42554783 C104.093789,0.573105627 137.148438,8.60487465 137.148438,8.60487465"></path>
+            </g>
+            <polygon id="Triangle-1" fill="#FF0000" sketch:type="MSShapeGroup" transform="translate(156.500000, 29.000000) scale(-1, -1) rotate(-79.000000) translate(-156.500000, -29.000000) " points="156.5 8 181 50 132 50 "></polygon>
+        </g>
+        <g id="Green" sketch:type="MSLayerGroup" transform="translate(392.118789, 216.540551) scale(-1, -1) rotate(-39.000000) translate(-392.118789, -216.540551) translate(326.618789, 195.540551)" stroke="#417505">
+            <g id="Path-4" transform="translate(0.000000, 8.000000)" stroke-width="14" sketch:type="MSShapeGroup">
+                <path d="M0.353966346,15.9179687 C0.353966346,15.9179687 34.0189423,0.284043127 52.0836195,0.42554783 C70.9210428,0.573105627 93.4417926,8.60487465 93.4417926,8.60487465"></path>
+            </g>
+            <polygon id="Triangle-1" fill="#417505" sketch:type="MSShapeGroup" transform="translate(106.626374, 21.000000) scale(-1, -1) rotate(-79.000000) translate(-106.626374, -21.000000) " points="106.626374 0 123.318681 42 89.9340659 42 "></polygon>
+        </g>
+        <g id="Refactor" sketch:type="MSLayerGroup" transform="translate(86.508863, 217.000000) scale(-1, -1) rotate(53.000000) translate(-86.508863, -217.000000) translate(20.508863, 196.000000)" stroke="#F8E81C">
+            <g id="Path-4" transform="translate(1.000000, 8.000000)" stroke-width="14" sketch:type="MSShapeGroup">
+                <path d="M0.353966346,15.9179688 C0.353966346,15.9179688 34.0189423,0.284043127 52.0836195,0.42554783 C70.9210428,0.573105627 93.4417926,8.60487465 93.4417926,8.60487465"></path>
+            </g>
+            <polygon id="Triangle-1" fill="#F8E81C" sketch:type="MSShapeGroup" transform="translate(107.626374, 21.000000) scale(-1, -1) rotate(-79.000000) translate(-107.626374, -21.000000) " points="107.626374 -1.13686838e-13 124.318681 42 90.9340659 42 "></polygon>
+        </g>
+        <text id="😸-" sketch:type="MSTextLayer" font-family="Apple Color Emoji" font-size="96" font-weight="normal" fill="#000000">
+            <tspan x="188" y="182">😸</tspan>
+            <tspan x="284" y="182" font-family="Helvetica"> </tspan>
+        </text>
+    </g>
+</svg>

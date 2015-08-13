@@ -4,6 +4,8 @@
 
 <!-- .element style="font-size:15vh;" -->
 
+Slides: http://bit.ly/1L9bckF
+
 
 ---
 
@@ -13,6 +15,8 @@
 - JavaScript @ <span style="font-family: monospace;">Braintree</span>
 - Lots of 💚  for 🍜
 - Poetry!
+
+(<a href="http://braintreepayments.com/careers">braintreepayments.com/careers</a>)
 
 Note: if any of those things sound interesting to you, talk to me afterwards.
 
@@ -28,7 +32,7 @@ You may be familiar with...
 
 ---
 
-\#ship-it 🚢🇮🇹
+LGTM 🚢🇮🇹
 
 ```javascript
 class TodoApp () {
@@ -64,6 +68,7 @@ But why? <!-- .element class="fragment" -->
 ---
 
 > The general adoption of unit testing is one of the most fundamental advances in software development in the last 5 to 7 years.
+> - [20 Jul 2006]
 
 <a href="http://blog.codinghorror.com/i-pity-the-fool-who-doesnt-write-unit-tests/" class="citation">Jeff Atwood</a>
 
@@ -127,24 +132,27 @@ Note: Kent Beck claims that he was inspired by an early book that encouraged pro
 
 ---
 
-<img src="img/tdd-cycle.png" alt="The TDD Cycle: red green refactor" style="background: white;">
+<img src="img/tdd-cycle.svg" alt="The TDD Cycle: red green refactor" style="background: white;">
 
-<a href="http://singlepageappbook.com" class="citation">singlepageappbook.com</div>
-
-Note: Credit for image to Mixu's single page app book http://singlepageappbook.com/assets/tdd.png
 ---
 
+
+<span class="hljs-tag">&lt;<span class="hljs-tomorrow-purple">gross-oversimplification</span>&gt;</span>
+<!-- .element class="fragment" data-fragment-index="4" style="font-size: 1.15em;" -->
 
 TDD is about:
 
 - Feedback
 - Ownership
-<!-- .element class="fragment" -->
+<!-- .element class="fragment" data-fragment-index="1" -->
 - Empowerment
-<!-- .element class="fragment" -->
+<!-- .element class="fragment" data-fragment-index="2" -->
 
 Tests are a means to an end
-<!-- .element class="fragment" -->
+<!-- .element class="fragment" data-fragment-index="3" -->
+
+<span class="hljs-tag">&lt;<span class="hljs-tomorrow-purple">/gross-oversimplification</span>&gt;</span>
+<!-- .element class="fragment" data-fragment-index="4" style="font-size: 1.15em;" -->
 
 Note: this is a holistic thing. You're supposed to feel _better_ about writing new code and maintaining existing code. No one should hang you out to dry for not having perfect coverage or an immense testing suite if you feel comfortable maintaining your code base (and passing it on to others)
 
@@ -248,9 +256,8 @@ Note: even with an application as simple as the one we are building, it can be h
 
 It's hard to TDD "feel"
 
-```javascript
-  it('pops')
-```
+<pre><span class="hljs-keyword">it</span>(<span class="hljs-string">'pops'</span>)</pre>
+<!-- .element style="padding: 1em; font-size:1.5em; text-align: center;" -->
 
 Note: I often find myself discarding the test driven workflow at the start of a project when I am iterating on a UI. Because we are in "mid-stack" we are often faced with shifting apis or design requirements that force us to be light on our feet.
 ---
@@ -281,7 +288,7 @@ describe('TodoApplication', () => {
       .sendKeys('Test')
       .sendKeys(protractor.Key.ENTER);
 
-    var todos = $$('#todo-list li');
+    let todos = $$('#todo-list li');
 
     expect(todos.get(0).getText()).toContain('Test');
   });
@@ -289,7 +296,7 @@ describe('TodoApplication', () => {
 ```
 ---
 
-<video src="clips/failing-integration-test.mov" autoplay playbackRate="1" class="stretch" controls></video>
+<video src="clips/failing-integration-test.mov" data-autoplay playbackRate="1" class="stretch" controls></video>
 
 ---
 
@@ -317,17 +324,17 @@ Note: Things are _always_ different out in the wild. Perfect coverage !== flawle
 
 ---
 
-😸 Pragmatic coverage: using the most effective layer
+😸  Invest in the most effective layer
 
 Note: some things are more more complex to test at certain layers. Drag and drop operations may not be cost effective to test in a headless browser environment and would be better served at the integration level (through selenium). "Native" features might be better pushed to manual testing if the infrastructure required to test them is too much. It's a constant tradeoff.
 ---
 
-Component Integration tests: good but not great
+Cost/Reward: Component Integration Test
 
 ```javascript
-describe('Headless View Test', () => {
-  it('adds a todo', () => {
-    let view = new View();
+describe('PhantomJS View Test', () => {
+  it('adds a todo when the user presses enter', () => {
+    let view = new TodoView();
     let input = document.querySelector('#new-todo');
 
     input.value = 'Add a headless test';
@@ -341,11 +348,12 @@ describe('Headless View Test', () => {
 });
 ```
 
+
 Note: these tests are nice because they area faster than full-on selenium tests, but they aren't as _real_ as your integration tests. You may be relying on
 
 ---
 
-😱 not writing tests😱
+😱 not testing things😱
 
 Note: i'll sometimes just have basic integration tests for a project that let me know if i've broken something or not. Or i'll have simple manual instructions. As long as there is something that allows you to commit with a level of confidence (given the context of your code) that is a good enough. That is, however, not acceptable for handling payments ;) I've actually found it difficult to get out of the testing mindset at times (I really like TDD)
 
@@ -355,46 +363,42 @@ Note: i'll sometimes just have basic integration tests for a project that let me
 
 ---
 
-```javascript
-import xhr from 'superagent';
-import RSVP from 'rsvp';
+<pre class="code-example"><span class="hljs-keyword">import</span> xhr <span class="hljs-keyword">from</span> <span class="hljs-string">'superagent'</span>;
+<span class="hljs-keyword">import</span> RSVP <span class="hljs-keyword">from</span> <span class="hljs-string">'rsvp'</span>;
 
-function getTodoStatus(id) {
-  let deferred = RSVP.defer();
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getTodoStatus</span>(<span class="hljs-params">id</span>) </span>{
+  <span class="hljs-keyword">let</span> deferred = RSVP.defer();
 
   xhr
-    .get(`/api/${id}`)
-    .end((err, result) => {
+    .get(<span class="hljs-string">`/api/<span class="hljs-subst">${id}</span>`</span>)
+    .end((err, result) =&gt; {
       _handleXhr(deferred, err, result);
     });
 
-  return deferred;
+  <span class="hljs-keyword">return</span> deferred;
 }
 
-function _handleXhr(deferred, err, result) {
-  if (err) { return defered.reject('Error'); }
+<span class="fragment"><span class="hljs-function" data-fragment><span class="hljs-keyword">function</span> <span class="hljs-title">_handleXhr</span>(<span class="hljs-params">deferred, err, result</span>) </span>{
+  <span class="hljs-keyword">if</span> (err) { <span class="hljs-keyword">return</span> defered.reject(<span class="hljs-string">'Error'</span>); }
 
   resolve(result.body);
-}
-```
+}</span></pre>
 
 ---
 
-```javascript
-describe('getTodoStatus', () => {
-  it('returns a deferred');
+<pre class="code-example"><span class="hljs-keyword">describe</span>(<span class="hljs-string">'getTodoStatus'</span>, () =&gt; {
+  <span class="hljs-keyword">it</span>(<span class="hljs-string">'returns a deferred'</span>);
 
-  describe('_handleXhr', () => {
-    it('rejects if err is defined', () => {
-      let testDeferred = {reject: sinon.spy()};
-      let error = new Error();
+  <span class="fragment"><span class="hljs-keyword">describe</span>(<span class="hljs-string">'_handleXhr'</span>, () =&gt; {
+    <span class="hljs-keyword">it</span>(<span class="hljs-string">'rejects if err is defined'</span>, () =&gt; {
+      <span class="hljs-keyword">let</span> mockDeferred = {reject: sinon.spy()};
+      <span class="hljs-keyword">let</span> error = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>();
       _handleXhr(error, testDeferred);
 
-      expect(testDeferred.reject).to.have.been.calledWith('Error');
+      expect(mockDeferred.reject).to.have.been.calledWith(<span class="hljs-string">'Error'</span>);
     });
-  });
-});
-```
+  });</span>
+});</pre>
 
 ---
 
@@ -438,7 +442,7 @@ function getTodoStatus(id) {
 
 ---
 
-😸 Substitute dependencies
+😿 Testing dependencies
 
 ---
 
@@ -453,7 +457,7 @@ class MyService {
 ```
 ---
 
-Breaking things up for testability 😿
+Breaking things up for testability
 
 ```javascript
 import externalApi from 'external-api';
@@ -467,6 +471,12 @@ class MyService {
   }
 }
 
+```
+
+```javascript
+describe('get', () => {
+  it('calls _externalApiProxy')
+});
 ```
 ---
 
@@ -489,29 +499,33 @@ describe('myService', () => {
 
 ---
 
-Dependency Manipulation Tools
+Tools for Dependency substitution
 
-- [Proxyquire](https://github.com/thlorenz/proxyquire) <small>CommonJS</small>
-- [Rewireify](https://github.com/i-like-robots/rewireify) <small>CommonJS</small>
-- [Jest](https://facebook.github.io/jest/) <small>CommonJS</small>
-- [Squire.js](https://github.com/iammerrick/Squire.js/) <small>AMD</small>
+- [Proxyquireify](https://github.com/thlorenz/proxyquireify) <small>CommonJS (browserify)</small>
+- [rewire webpack](https://github.com/jhnns/rewire-webpack) <small>CommonJS (webpack)</small>
+- [Squire.js](https://github.com/iammerrick/Squire.js/) <small>AMD (require.js)</small>
+
+<!-- [Jest](https://facebook.github.io/jest/) <small>CommonJS</small> -->
 
 ---
 
 ## Maintaining tests
 
-
 Note: we don't always think of tests like we do production code. The environment is different, but many of the rules apply.
 ---
 
-Tests are documentation
+Tests are first class citizens
 
-<pre>
-Todos
-  #completed()
+---
+
+Tests tell a story
+
+<pre style="background: #3F3F3F;">
+<span class="hljs-keyword">Todos</span>
+  <span class="hljs-literal">#completed</span>
     returns completed todos
     returns an empty array if there are no results
-  #update()
+  <span class="hljs-literal">#update</span>
     changes the text of a todo
     adds tags contained in the text of a todo
     updates the edited timestamp of a todo
@@ -521,15 +535,10 @@ Note: Talk about tests as documentation. show blade's describe output. Say "it's
 
 ---
 
-Tests are destined for copy pasta
+😿  Tests are boring to read
 
 Note: make sure your coworkers are copying _good_ tests when possible.
 
----
-
-😸 Writing a test should be as easy and fun as possible.
-
-Note: Angular has done a great job of making it easy to test things. Regardless of the framework it should be easy to write tests.
 ---
 
 😸 Obliterate Meaningless tests
@@ -613,7 +622,51 @@ it('deletes todos', () => {
 Note: this needs to be a: combination of both useful and descriptive setup + non-useful boilerplate
 ---
 
-😸  Keep tests CRISP
+Don't be too DRY
+
+```javascript
+describe('edge case', function () {
+  strange();
+  setup();
+  code();
+
+  let state = todos.completed();
+
+  expect(state).to.match('completed');
+});
+```
+
+---
+
+😿  Tests are boring to write
+
+---
+
+😸  Keep your tests fresh
+
+```javascript
+let spy = sinon.spy();
+
+expect(spy.calledWith(1)).to.eql(true);
+```
+
+
+```javascript
+import sinonChai from 'sinon-chai';
+chai.use(sinonChai);
+```
+<!-- .element class="fragment" -->
+
+```javascript
+expect(spy).to.have.been.calledWith(1);
+```
+<!-- .element class="fragment" -->
+
+---
+
+<img src="img/party-hard.gif" alt="Dancing">
+
+Tests should be as fun as possible to write
 
 ---
 
@@ -632,7 +685,7 @@ data-background="http://example.com/image.png" data-background-size="100px" -->
 
 ---
 
-<video src="clips/todo-integration-tests.mov" autoplay playbackRate="5" class="stretch" controls></video>
+<video src="clips/todo-integration-tests.mov" data-autoplay playbackRate="5" class="stretch" controls></video>
 
 ---
 
@@ -650,7 +703,7 @@ data-background="http://example.com/image.png" data-background-size="100px" -->
 
 <img src="img/browserstack.png" alt="Browserstack" style="">
 
-😸  Invest in infrastructure
+😸 Invest in infrastructure
 
 ---
 
@@ -662,20 +715,66 @@ Note: we are using rudimentary retries for our integration tests. This is a boon
 
 ---
 
-Output from re-runner
+```ruby
+npm run test:integration
+
+FAILED
+
+re-running tests: test attempt 1
+
+FAILED
+
+re-running tests: test attempt 2
+
+FAILED
+
+re-running tests: test attempt 2
+
+SUCCESS
+```
 
 Note: we have a re-runner in place for our application. It's rudimentary but very effective
 ---
 
 😿 Slow Tests
 
-  - Shard
-  - Sleep Smart
-    avoid `sleep(2000)` when possible, prefer (waitFor) and timeouts
 
 ---
 
-Fail as fast and as explicitly as possible.
+😸 Shard
+
+---
+
+😸 Sleep Smart
+
+```
+// not so good
+wait(2000);
+
+// better
+
+waitFor($('#todos').isPresent);
+```
+
+---
+
+😸 Fail as fast and as explicitly as possible.
+
+```javascript
+helpers.addTodo('test')
+// lengthy animated process
+
+expect($('#todos').get(0).getText().to.equal('test');
+```
+
+```javascript
+expect($('#new-todo').isPresent).to.be.true;
+helpers.addTodo('test');
+// lengthy animated process
+
+expect($('#todos').get(0).getText().to.equal('test');
+```
+<!-- .element class="fragment" -->
 
 ---
 
@@ -692,6 +791,8 @@ browser
 ```
 
 ---
+
+😸 Abstract (some of) the pain away
 
 ```javascript
 export function selectItem (elem) {
