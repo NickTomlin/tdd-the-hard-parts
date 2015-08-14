@@ -6,6 +6,8 @@
 
 Slides: http://bit.ly/1L9bckF
 
+Feedback: http://midwestjs.com/feedback
+
 
 ---
 
@@ -375,29 +377,27 @@ Note: i'll sometimes just have basic integration tests for a project that let me
       _handleXhr(deferred, err, result);
     });
 
-  <span class="hljs-keyword">return</span> deferred;
+  <span class="hljs-keyword">return</span> deferred.promise;
 }
 
 <span class="fragment"><span class="hljs-function" data-fragment><span class="hljs-keyword">function</span> <span class="hljs-title">_handleXhr</span>(<span class="hljs-params">deferred, err, result</span>) </span>{
-  <span class="hljs-keyword">if</span> (err) { <span class="hljs-keyword">return</span> defered.reject(<span class="hljs-string">'Error'</span>); }
+  <span class="hljs-keyword">if</span> (err) { <span class="hljs-keyword">return</span> deferred.reject(<span class="hljs-string">'Error'</span>); }
 
-  resolve(result.body);
+  deferred.resolve(result.body);
 }</span></pre>
 
 ---
 
 <pre class="code-example"><span class="hljs-keyword">describe</span>(<span class="hljs-string">'getTodoStatus'</span>, () =&gt; {
-  <span class="hljs-keyword">it</span>(<span class="hljs-string">'returns a deferred'</span>);
-
-  <span class="fragment"><span class="hljs-keyword">describe</span>(<span class="hljs-string">'_handleXhr'</span>, () =&gt; {
+  <span class="hljs-keyword">describe</span>(<span class="hljs-string">'_handleXhr'</span>, () =&gt; {
     <span class="hljs-keyword">it</span>(<span class="hljs-string">'rejects if err is defined'</span>, () =&gt; {
       <span class="hljs-keyword">let</span> mockDeferred = {reject: sinon.spy()};
       <span class="hljs-keyword">let</span> error = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>();
-      _handleXhr(error, testDeferred);
+      _handleXhr(error, mockDeferred);
 
       expect(mockDeferred.reject).to.have.been.calledWith(<span class="hljs-string">'Error'</span>);
     });
-  });</span>
+  });
 });</pre>
 
 ---
@@ -406,9 +406,8 @@ Note: i'll sometimes just have basic integration tests for a project that let me
 
 ```javascript
 describe('getTodoStatus', () => {
-  let fakeServer = sinon.fakeServer.create();
-
   it('resolves with an error on connection error', (done) => {
+    let fakeServer = sinon.fakeServer.create();
     fakeServer.respondWith('GET', [500, {}, '']);
 
     getTodoStatus(1)
@@ -425,10 +424,9 @@ You and your code benefit
 
 ```javascript
 import xhr from 'superagent';
-import RSVP from 'rsvp';
 
 function getTodoStatus(id) {
-  return new RSVP.promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     xhr
       .get(`/api/${id}`)
       .end((err, result) => {
@@ -484,7 +482,7 @@ describe('get', () => {
 import proxyquire from 'proxyquire';
 
 describe('myService', () => {
-  it('uses externalApi to fetch todo', () => {
+  it('fetches a result from externalApi', () => {
     let fakeExternalApi = {request: sinon.spy()};
     let myService = new proxyQuire('MyService', {
       'external-api' fakeExternalApi
@@ -814,12 +812,21 @@ selectItem($('#complete-todo'))
 
 ---
 
+## The long road
+
+---
+
+Tdd is an art.
+
+We can make art.
+
+---
+
 Resources
 
-- Test Driven Development By Design
-- Building Object Oriented Software, guided by tests
-- Is TDD Dead?
-- Writing Testable JavaScript
+- Test Driven Development By Design (Kent Beck)
+- Is TDD Dead? (DHH, Kent Beck, Martin Fowler)
+- Writing Testable JavaScript (Mark Ethan Trostler)
 
 ---
 
@@ -829,3 +836,7 @@ Resources
 
 * @itsnicktomlin
 * github.com/nicktomlin
+
+Slides: http://bit.ly/1L9bckF
+
+Feedback: http://midwestjs.com/feedback
