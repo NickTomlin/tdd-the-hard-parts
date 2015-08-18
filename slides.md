@@ -824,9 +824,9 @@ We can make art.
 
 Resources
 
-- Test Driven Development By Design (Kent Beck)
-- Is TDD Dead? (DHH, Kent Beck, Martin Fowler)
-- Writing Testable JavaScript (Mark Ethan Trostler)
+- [Test-Driven Development by Example](http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530) (Kent Beck)
+- [Is TDD Dead?](http://martinfowler.com/articles/is-tdd-dead/) (DHH, Kent Beck, Martin Fowler)
+- [Testable JavaScript](http://shop.oreilly.com/product/0636920024699.do) (Mark Ethan Trostler)
 
 ---
 
